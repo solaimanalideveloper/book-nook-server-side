@@ -4,13 +4,17 @@ import { createRemoteJWKSet, jwtVerify } from "jose";
 import "dotenv/config";
 import cors from "cors";
 
+
 const app = express();
 const PORT = 8000;
+
 
 app.use(cors());
 app.use(express.json());
 
+
 const client = new MongoClient(process.env.MONGODB_URI);
+
 
 export async function connectToMongoDB() {
   try {
@@ -25,6 +29,8 @@ const mongoClient = await connectToMongoDB();
 const db = mongoClient.db("bookstore");
 const booksStoreCollection = db.collection("book-nook");
 
+
+
 // JWT verification middleware
 const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -35,7 +41,6 @@ const verifyToken = async (req, res, next) => {
   if (!token) {
     return res.status(401).send({ msg: "Unauthorized!" });
   }
-
   const JWKS = createRemoteJWKSet(
     new URL(`${process.env.CLIENT_URL}/api/auth/jwks`),
   );
