@@ -81,12 +81,14 @@ app.get("/all-books", async (req, res) => {
   res.send(result);
 });
 
+
 // Get a specific book by id
 app.get("/all-books/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
   const result = await booksStoreCollection.findOne({ _id: new ObjectId(id) });
   res.send(result);
 });
+
 
 // Update a data for a specific book by id
 app.patch("/all-books/:id", verifyToken, async (req, res) => {
@@ -99,6 +101,7 @@ app.patch("/all-books/:id", verifyToken, async (req, res) => {
   res.json(result);
 });
 
+
 // Delete a specific book by id
 app.delete("/all-books/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
@@ -107,6 +110,7 @@ app.delete("/all-books/:id", verifyToken, async (req, res) => {
   });
   res.json(result);
 });
+
 
 // Borrow a book
 app.post("/borrow-book/:id", verifyToken, async (req, res) => {
@@ -125,6 +129,7 @@ app.post("/borrow-book/:id", verifyToken, async (req, res) => {
   res.json({ message: "Book borrowed successfully.", result });
 });
 
+
 // Delete a borrowed book (returning it)
 app.delete("/borrowed-books/:id", async (req, res) => {
   const { id } = req.params;
@@ -141,6 +146,7 @@ app.delete("/borrowed-books/:id", async (req, res) => {
   );
   res.json({ message: "Book returned successfully.", result });
 });
+
 
 // Return a borrowed book
 app.post("/return-book/:id", async (req, res) => {
@@ -159,11 +165,14 @@ app.post("/return-book/:id", async (req, res) => {
   res.json({ message: "Book returned successfully.", result });
 });
 
+
 // http://localhost:8000/
+
 
 app.get("/", (req, res) => {
   res.send({ message: "Server is running find !" });
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running at ${PORT}`);
