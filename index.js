@@ -53,6 +53,7 @@ const verifyToken = async (req, res, next) => {
 };
 
 
+
 // Add a new book
 app.post("/add-books", verifyToken, async (req, res) => {
   const data = req.body;
@@ -75,11 +76,13 @@ app.post("/add-books", verifyToken, async (req, res) => {
 });
 
 
+
 // Get all books
 app.get("/all-books", async (req, res) => {
   const result = await booksStoreCollection.find().toArray();
   res.send(result);
 });
+
 
 
 // Get a specific book by id
@@ -88,6 +91,7 @@ app.get("/all-books/:id", verifyToken, async (req, res) => {
   const result = await booksStoreCollection.findOne({ _id: new ObjectId(id) });
   res.send(result);
 });
+
 
 
 // Update a data for a specific book by id
@@ -102,6 +106,7 @@ app.patch("/all-books/:id", verifyToken, async (req, res) => {
 });
 
 
+
 // Delete a specific book by id
 app.delete("/all-books/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
@@ -110,6 +115,7 @@ app.delete("/all-books/:id", verifyToken, async (req, res) => {
   });
   res.json(result);
 });
+
 
 
 // Borrow a book
