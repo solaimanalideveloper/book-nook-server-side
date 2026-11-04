@@ -44,7 +44,6 @@ const verifyToken = async (req, res, next) => {
   const JWKS = createRemoteJWKSet(
     new URL(`${process.env.CLIENT_URL}/api/auth/jwks`),
   );
-
   try {
     const { payload } = await jwtVerify(token, JWKS);
     next();
@@ -52,6 +51,7 @@ const verifyToken = async (req, res, next) => {
     return res.status(500).send({ msg: "Server Error!" });
   }
 };
+
 
 // Add a new book
 app.post("/add-books", verifyToken, async (req, res) => {
@@ -73,6 +73,7 @@ app.post("/add-books", verifyToken, async (req, res) => {
   console.log(result);
   res.send(result);
 });
+
 
 // Get all books
 app.get("/all-books", async (req, res) => {
