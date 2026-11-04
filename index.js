@@ -166,10 +166,7 @@ app.post("/return-book/:id", async (req, res) => {
 });
 
 
-// http://localhost:8000/
-
-
-
+// Home route app.get("/", (req, res) => {}
 app.get("/", (req, res) => {
   res.send({ message: "Server is running find !" });
 });
